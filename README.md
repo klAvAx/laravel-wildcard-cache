@@ -1,6 +1,8 @@
 ## Wildcard for Laravel Cache
 ![Unit Tests](https://github.com/klAvAx/laravel-wildcard-cache/workflows/tests/badge.svg)
 [![Packagist License](https://img.shields.io/badge/Licence-MIT-blue)](http://choosealicense.com/licenses/mit/)
+[![Latest Stable Version](https://img.shields.io/packagist/v/klavax/laravel-wildcard-cache?label=Stable)](https://packagist.org/packages/klavax/laravel-wildcard-cache)
+[![Total Downloads](https://img.shields.io/packagist/dt/klavax/laravel-wildcard-cache?label=Downloads)](https://packagist.org/packages/klavax/laravel-wildcard-cache)
 
 This is a package which adds wildcard support to Laravel Cache by replacing/overriding laravel Cache stores to include wildcard support where applicable.
 
@@ -49,3 +51,7 @@ Cache::memo()->forget("this_{any}_works")
 ## Extra Info
 
 APCu support is experimental, documentation for it does document an APCUIterator class, but i have not been able to test it successfully...
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=klAvAx/laravel-wildcard-cache&type=Date)](https://www.star-history.com/#klAvAx/laravel-wildcard-cache&Date)
