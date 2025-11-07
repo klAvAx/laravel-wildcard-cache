@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Feature request
+    url: https://github.com/klAvAx/laravel-wildcard-cache/discussions
+    about: 'For ideas or feature requests, start a new discussion'
+  - name: Bug reports
+    url: https://github.com/klAvAx/laravel-wildcard-cache/issues
+    about: 'For bug reports'
