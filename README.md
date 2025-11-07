@@ -1,55 +1,27 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## Wildcard for Laravel Cache
+![Unit Tests](https://github.com/klAvAx/laravel-wildcard-cache/workflows/tests/badge.svg)
+[![Packagist License](https://img.shields.io/badge/Licence-MIT-blue)](http://choosealicense.com/licenses/mit/)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-<a href="https://insights.linuxfoundation.org/project/laravel-framework"><img src="https://insights.linuxfoundation.org/api/badge/health-score?project=laravel-framework" alt="Health score"></a>
-</p>
+This is a package which adds wildcard support to Laravel Cache by replacing/overriding laravel Cache stores to include wildcard support where applicable.
 
-## About Laravel
+This package replaces/overrides these Cache Stores:
+- ApcStore
+- ArrayStore
+- DatabaseStore
+- SessionStore
 
-> **Note:** This repository contains the core code of the Laravel framework. If you want to build an application using Laravel, visit the main [Laravel repository](https://github.com/laravel/laravel).
+This package also adds a new methods which are used behind the scenes to:
+- ApcWrapper
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+## Installation
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Require this package with composer.
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation gives you a complete toolset required to build any application with which you are tasked.
+```shell
+composer require klavax/laravel-wildcard-cache
+```
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
-
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains thousands of video tutorials covering a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-Please review [our security policy](https://github.com/laravel/framework/security/policy) on how to report security vulnerabilities.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](LICENSE.md).
-
-
-
-
-Include this in "how to use" section:\
-composer.json
+Also you will probably want to "silence" Ambiguous class resolution warnings and that can be done if you include `exclude-from-classmap` in your composer.json `autoload` section:
 ```json
 {
     "autoload": {
@@ -63,3 +35,17 @@ composer.json
     }
 }
 ```
+
+## Usage
+
+If you are using `apc`, `array`, `database` or `session` cache stores then now you can use `{any}` token in `Cache::forget` calls like so:
+
+```php
+Cache::forget("item_{any}");
+Cache::forget("someOtherItem_{any}_nested_{any}");
+Cache::memo()->forget("this_{any}_works")
+```
+
+## Extra Info
+
+APCu support is experimental, documentation for it does document an APCUIterator class, but i have not been able to test it successfully...
